@@ -1,0 +1,78 @@
+# Import the module to generate random numbers
+import random
+
+# Defining list of formulas
+def drawoutcome ():
+    print ('draw condition')
+
+def compwin ():
+    print ('Computer win')
+
+def youwin():
+    print ('you win')
+
+# List for indexing later
+outputlist =["rock", "scissors", "paper", ""]
+
+# Initialization of some variables
+myinput = ""
+condition = True
+validlist = [1,2,0,'x']
+
+# Defining the rules
+print("-"*18)
+print("Rules Definitions")
+print("-"*18)
+for index, value in enumerate(validlist):
+  if index == len(validlist) - 1:
+    print("{0:^5n} : {1:<9s}".format(index,'x - Exit'))
+  else:
+    print("{0:^5n} : {1:<9s}".format(index, outputlist[index]))
+print("-"*18)
+
+# Loops when users want to play
+while condition:
+  # Generating compuer output
+  compnum = random.randint(0,2)
+  # Getting users input
+  myinput = input('Enter 0 to 2: ')
+
+  try:
+    # transforming into input
+    myinput = int(myinput)
+  except:
+    # to convert into lower case so that 'X' = 'x'
+    myinput = myinput.casefold()
+    pass
+
+  # Validation
+  if myinput not in validlist:
+    print("Please enter a valid range")
+    continue
+  # Exit game
+  elif myinput == 'x':
+    print("We play again next time")
+    condition = False
+    break
+
+  # Defining condition, total should be six possibilities + three draw conditions
+  elif myinput == compnum:
+      drawoutcome ()
+  elif myinput ==0:
+      if compnum == 1:
+            youwin()
+      else:
+            compwin ()
+  elif myinput == 1:
+      if compnum == 2:
+            youwin()
+      else:
+            compwin ()
+  elif myinput ==2:
+      if compnum ==0:
+            youwin()
+      else:
+            compwin ()
+  # Answer Revealing
+  print (f"player: {outputlist [myinput]}")
+  print (f"computer: {outputlist [compnum]}")
